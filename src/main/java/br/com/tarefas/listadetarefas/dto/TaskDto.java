@@ -1,11 +1,12 @@
 package br.com.tarefas.listadetarefas.dto;
 
+import br.com.tarefas.listadetarefas.constants.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -15,5 +16,7 @@ public class TaskDto {
     private Long id;
     private String nameTask;
     private String description;
-    private LocalDate date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy",locale = "pt-BR")
+    private LocalDate dateTask;
+    private Status status;
 }

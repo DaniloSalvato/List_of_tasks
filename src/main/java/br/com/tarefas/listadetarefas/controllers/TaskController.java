@@ -2,6 +2,7 @@ package br.com.tarefas.listadetarefas.controllers;
 
 import br.com.tarefas.listadetarefas.dto.TaskDto;
 import br.com.tarefas.listadetarefas.dto.TaskFormDto;
+import br.com.tarefas.listadetarefas.dto.UpdateTaskStatusFormDto;
 import br.com.tarefas.listadetarefas.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,14 +11,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import javax.validation.Valid;
 import java.text.ParseException;
 
-@Controller
+@RestController
 @RequestMapping("/task")
 public class TaskController {
 
@@ -41,7 +41,12 @@ public class TaskController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<TaskDto>updateTask(@PathVariable Long id, @Valid @RequestBody TaskFormDto taskFormDto){
-        return ResponseEntity.ok().body(service.updateTask(id,taskFormDto));
+        return ResponseEntity.ok().body(service.updateTask(id, taskFormDto));
+    }
+
+    @PutMapping(path = "/{id}/status")
+    public ResponseEntity<TaskDto>updateTaskStatus(@PathVariable Long id, @Valid @RequestBody UpdateTaskStatusFormDto updateTaskStatusFormDto){
+        return ResponseEntity.ok().body(service.updateTaskStatus(id, updateTaskStatusFormDto));
     }
 
     @DeleteMapping(path = "/{id}")

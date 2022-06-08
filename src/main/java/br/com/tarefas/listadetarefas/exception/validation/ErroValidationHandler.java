@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +29,10 @@ public class ErroValidationHandler {
         fieldError.forEach(e -> {
 
             String message = messageSource.getMessage(e, LocaleContextHolder.getLocale());
-
             ErroFormDto error = new ErroFormDto(e.getField(), message);
             errorFormDto.add(error);
         });
 
         return errorFormDto;
     }
-
-
 }
